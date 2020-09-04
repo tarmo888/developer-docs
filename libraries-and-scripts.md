@@ -8,7 +8,8 @@
 
 [VS Code plugin for Oscript](https://marketplace.visualstudio.com/items?itemName=obyte.oscript-vscode-plugin)  
 [aa-testkit](https://github.com/valyakin/aa-testkit) - Instant Obyte devnet network set up and testing  
-[parser-aa-vars](https://github.com/olabs-org/parser-aa-vars) - Script for parsing variables from AA
+[parser-aa-vars](https://github.com/olabs-org/parser-aa-vars) - Script for parsing variables from AA  
+[aagent.js ](https://github.com/olabs-org/aagent.js)- Helper library for AA data and events
 
 [AA-channels-lib](https://github.com/byteball/aa-channels-lib) - a general purpose library for payment channels  
 [Pay-Per-Call API Library](https://github.com/byteball/pay-per-call-API) - pay-as-you-go payment library for API use
