@@ -201,3 +201,8 @@ If don't wish to get the logs to console and you also would like to disable writ
 ```
 {% endcode %}
 
+## Documentation
+
+Full documentation for headless Obyte node can be found there  
+[https://byteball.github.io/headless-obyte/](https://byteball.github.io/headless-obyte/)
+
