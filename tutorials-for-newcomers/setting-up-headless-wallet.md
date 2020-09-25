@@ -134,7 +134,7 @@ The final file would look something like this:
 ```
 {% endcode %}
 
-### Wallet is ready to be started
+## Wallet is ready to be started
 
 That’s it, your headless wallet is now ready to be started. If you set bLight = false; your wallet will start synchronizing the entire DAG. This can take a long time depending on the speed of your server and particularly the SSD disk.
 
@@ -142,49 +142,70 @@ To make sure the process doesn’t run out of memory \(which can cause crashes\)
 
 `node --max-old-space-size=4096 start.js`
 
-## Useful extras
+### Run on background using "bg" and "fg"
 
-Since Obyte runs on an SQLite database by default, which is [located in user data folder](../configuration.md), you might want to be able to explore the data stored yourself, thereby making it easier to create the logic for the bot if you need to access data in the databases. If you wish to [setup Obyte to use MySQL database instead](../configuration.md#conf-storage) then that can be changed with a configuration file.  
-`apt-get install sqlite3`
+#### Send to background
 
-### Leave a process running using “screen”
+`ctrl+z  
+bg`
 
-It might just be me, but I always found that a better way to leave processes running even after I log off the server, is to use the program “screen”. It’s super easy to use. So I suggest, that even though the bot say you can send the process to the background by using ctrl+z, i have a harder time separating the various background processes. So I suggest you simply do this:
+#### Stop the headless wallet
+
+`fg    
+ctrl+c`
+
+### Run on background using “screen”
+
+It might just be me, but I always found that a better way to leave processes running even after I log off the server, is to use the program `screen`. It’s super easy to use. So I suggest, that even though the bot say you can send the process to the background by using `ctrl+z` and `bg`, i have a harder time separating the various background processes. So I suggest you simply do this:
 
 `sudo apt-get install screen`
 
 This allows you to start, detach and re-attach screens as you please.
 
-### Start a new screen
+#### Start a new screen
 
-`screen`
+`screen` - run it when you have detached from screen and want to start a totally new screen.
 
-### Detach from a screen
+#### Send screen to background
 
-`ctrl+a and d`
+`ctrl+a and d` - this detaches from screens and sends it to background \(be careful not to miss pressing `a` before `d`.
 
-### Reattach to a screen
+#### Resuming a screen from background
 
-`screen -r`
+`screen -r` - this reattaches to most recently started screen. If you have started multiple then use `screen -list` to get a list of all started screens and then reattached with `screen -r PPID`
 
-### Terminate a screen
+#### Stop the headless wallet
 
-`ctrl+d`
+`ctrl+d` - while attached to screen, this terminates the screen and stops the headless wallet
 
-### Stop the headless wallet
+### Run on background non-interactively
 
-`fg    
-ctrl+c`
+If you are unable to enter a passphrase every time the wallet starts and/or are willing to accept the security risks, set `bNoPassphrase` to `true` and daemonize the app when starting:
+
+#### Starting the daemon
+
+```text
+node start.js 1>log 2>errlog &
+```
+
+#### Stopping the daemon
+
+Checking if `node` runs
+
+`ps -ef | { head -1; grep node; }`  or `ps -fp $(pgrep -d, -x node)`
+
+`kill PID` - sends SIGTERM command to terminate the process by PID number.
+
+## Useful extras
+
+Since Obyte runs on an SQLite database by default, which is [located in user data folder](../configuration.md), you might want to be able to explore the data stored yourself, thereby making it easier to create the logic for the bot if you need to access data in the databases. If you wish to [setup Obyte to use MySQL database instead](../configuration.md#conf-storage) then that can be changed with a configuration file.  
+`apt-get install sqlite3`
 
 ### Monitoring logs
 
 Checking the log to see if things are running \(by default, log file is in [same folder as configuration](../configuration.md)\):
 
 `tail -f ~/headless-obyte/log.txt`
-
-Checking if service runs \(look for the `node start.js` process\)
-
-`ps -aux |grep node`
 
 ### Disabling logs
 
