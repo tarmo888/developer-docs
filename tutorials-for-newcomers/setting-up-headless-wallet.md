@@ -196,7 +196,7 @@ Checking if `node` runs
 
 `kill PID` - sends SIGTERM command to terminate the process by PID number.
 
-If you want to kill all node processes then use `pkill node`
+If you want to automatically stop all node processes then use `pkill node`
 
 ## Useful extras
 
