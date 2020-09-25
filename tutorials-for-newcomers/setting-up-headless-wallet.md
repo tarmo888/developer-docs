@@ -196,6 +196,8 @@ Checking if `node` runs
 
 `kill PID` - sends SIGTERM command to terminate the process by PID number.
 
+If you want to kill all node processes then use `pkill node`
+
 ## Useful extras
 
 Since Obyte runs on an SQLite database by default, which is [located in user data folder](../configuration.md), you might want to be able to explore the data stored yourself, thereby making it easier to create the logic for the bot if you need to access data in the databases. If you wish to [setup Obyte to use MySQL database instead](../configuration.md#conf-storage) then that can be changed with a configuration file.  
