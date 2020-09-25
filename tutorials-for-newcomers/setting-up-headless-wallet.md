@@ -194,7 +194,7 @@ Checking if `node` runs
 
 `ps -ef | { head -1; grep node; }`  or `ps -fp $(pgrep -d, -x node)`
 
-`kill PID` - sends SIGTERM command to terminate the process by PID number.
+`kill PID` - sends SIGTERM command to stop the process by PID number.
 
 If you want to automatically stop all node processes then use `pkill node`
 
