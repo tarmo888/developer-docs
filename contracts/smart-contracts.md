@@ -88,21 +88,24 @@ More definition examples can be seen on [smart contracts definitions page](refer
 To request the user to pay his share to the contract, create the below Javascript object `objPaymentRequest` which contains both the payment request and the definition of the contract, encode the object in base64, and send it over to the user:
 
 ```javascript
-var arrPayments = [{address: shared_address, amount: peer_amount, asset: peerAsset}];
-var assocDefinitions = {};
-assocDefinitions[shared_address] = {
+var payments = [
+    {address: shared_address, amount: peer_amount, asset: peerAsset}
+];
+var definitions = {};
+definitions[shared_address] = {
     definition: arrDefinition,
     signers: assocSignersByPath
 };
-var objPaymentRequest = {payments: arrPayments, definitions: assocDefinitions};
+var objPaymentRequest = {payments, definitions};
 var paymentJson = JSON.stringify(objPaymentRequest);
 var paymentJsonBase64 = Buffer.from(paymentJson).toString('base64');
 var paymentRequestCode = 'payment:'+paymentJsonBase64;
 var paymentRequestText = '[...]('+paymentRequestCode+')';
-device.sendMessageToDevice(correspondent.device_address, 'text', paymentRequestText);
+
+device.sendMessageToDevice(user_device_address, 'text', paymentRequestText);
 ```
 
-The user's wallet will parse this message, display the definition of the contract in a user readable form, and offer the user to pay the requested amount. Your payment-waiting code will be called when the payment is seen on the DAG.
+The user's wallet will parse this message, display the definition of the contract in a user-readable form, and offer the user to pay the requested amount. Your payment-waiting code will be called when the payment is seen on the DAG.
 
 ## Re-sending lost smart-contracts
 

@@ -25,6 +25,8 @@ You will likely want to generate a unique payment address per user, per transact
 
 ```javascript
 var headlessWallet = require('headless-obyte');
+var device = require('ocore/device.js');
+
 eventBus.once('headless_wallet_ready', () => {
     headlessWallet.issueNextMainAddress((user_wallet_address) => {
         // send it over to the user
@@ -42,6 +44,27 @@ It is possible to request that the payment would be done from any single address
 [...](obyte:USER_WALLET_ADDRESS?amount=1&single_address=1)
 [...](obyte:USER_WALLET_ADDRESS?amount=1&single_address=singleUEPO3OD2TUUJUOECVMKVSRHRDJ4ST2FS)
 ```
+
+## Requesting multiple payments
+
+To request the user to pay multiple payments at once, create the below Javascript object `objPaymentRequest` which can contain multiple addresses and multiple assets, encode the object in base64, and send it over to the user:
+
+```javascript
+var payments = [
+    {address: address1, amount: amount1, asset: asset1},
+    {address: address1, amount: amount2, asset: asset2},
+    {address: address2, amount: amount3, asset: asset1}
+];
+var objPaymentRequest = {payments};
+var paymentJson = JSON.stringify(objPaymentRequest);
+var paymentJsonBase64 = Buffer.from(paymentJson).toString('base64');
+var paymentRequestCode = 'payment:'+paymentJsonBase64;
+var paymentRequestText = '[...]('+paymentRequestCode+')';
+
+device.sendMessageToDevice(user_device_address, 'text', paymentRequestText);
+```
+
+The user's wallet will parse this message, display the multiple payments in a user-readable form, and offer the user to pay the requested amounts. Your payment-waiting code will be called when the payment is seen on the DAG.
 
 ## Waiting for payments
 
@@ -98,7 +121,7 @@ eventBus.on('mci_became_stable', function(mci){
 });
 ```
 
-## Sending payments
+## Sending payments from chat bot
 
 To send payments, you need to include a headless wallet
 
