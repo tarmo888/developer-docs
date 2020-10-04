@@ -20,7 +20,7 @@
   * [Oscript language reference](autonomous-agents/oscript-language-reference.md)
 * [Issuing assets on Obyte](issuing-assets-on-byteball.md)
 * [Attestation profiles / KYC](private-profiles.md)
-* [Wallet address verification](verifying-address-with-signed-message.md)
+* [Address signing/verification](verifying-address-with-signed-message.md)
 * [URI protocol](byteball-protocol-uri.md)
 * [Events list](list-of-events.md)
 * [Websocket API](websocket-api/README.md)

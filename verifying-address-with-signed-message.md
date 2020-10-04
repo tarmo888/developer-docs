@@ -4,7 +4,7 @@ description: >-
   offering to sign a message.
 ---
 
-# Wallet address verification
+# Address signing/verification
 
 You can also verify ownership of address by requesting a payment from their address and this method is more appropriate if you need to receive a payment anyway.
 
@@ -20,7 +20,7 @@ where `challenge` is the message to be signed. This request will be displayed in
 [...](signed-message:base64_encoded_text)
 ```
 
-You can parse and validate it, here is an example how to verify user wallet address:
+You can parse and validate it, here is an example how to verify user's account address:
 
 ```javascript
 // verify posted addresss
