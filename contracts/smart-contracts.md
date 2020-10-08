@@ -35,7 +35,7 @@ var arrDefinition = ['or', [
         // conditions when user can unlock the contract
     ]],
     ['and', [
-        ['address', bot_address],
+        ['address', my_address],
         // conditions when I can unlock the contract
     ]]
 ]];
@@ -49,10 +49,10 @@ var assocSignersByPath = {
     'r.0.0': {
         address: user_address,
         member_signing_path: 'r', // unused, should be always 'r'
-        device_address: from_address
+        device_address: user_device_address
     },
     'r.1.0': {
-        address: bot_address,
+        address: my_address,
         member_signing_path: 'r', // unused, should be always 'r'
         device_address: device.getMyDeviceAddress()
     }
@@ -102,7 +102,7 @@ var paymentJsonBase64 = Buffer.from(paymentJson).toString('base64');
 var paymentRequestCode = 'payment:'+paymentJsonBase64;
 var paymentRequestText = '[...]('+paymentRequestCode+')';
 
-device.sendMessageToDevice(from_address, 'text', paymentRequestText);
+device.sendMessageToDevice(user_device_address, 'text', paymentRequestText);
 ```
 
 The user's wallet will parse this message, display the definition of the contract in a user-readable form, and offer the user to pay the requested amount. Your payment-waiting code will be called when the payment is seen on the DAG.

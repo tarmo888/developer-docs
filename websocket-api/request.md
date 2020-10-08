@@ -246,10 +246,20 @@ This requests returns response whether composed unit was accepted or not. Unit o
 {% tab title="response.json" %}
 ```javascript
 {
+    type: "response",
+    content: {
+        tag: tag,
+        response: null
+    }
+}
+```
+
+```javascript
+{
     type: 'response',
     content: {
         tag: tag,
-        response: 'sleep' || null
+        response: 'sleep'
     }
 }
 ```
@@ -262,13 +272,14 @@ This requests returns response whether composed unit was accepted or not. Unit o
 {% tab title="request.json" %}
 ```javascript
 {
-    type: 'request',
+    type: "request",
     content: {
         tag: tag,
-        command: 'subscribe',
+        command: "subscribe",
         params: {
-            subscription_id: subscription_id,
-            last_mci: last_mci
+            subscription_id: crypto.randomBytes(30).toString('base64'),
+            last_mci: 0,
+            library_version: "0.1"
         }
     }
 }
@@ -278,10 +289,22 @@ This requests returns response whether composed unit was accepted or not. Unit o
 {% tab title="response.json" %}
 ```javascript
 {
-    type: 'response',
+    type: "response",
     content: {
         tag: tag,
-        response: 'subscribed'
+        response: "subscribed"
+    }
+}
+```
+
+```javascript
+{
+    type: "response",
+    content: {
+        tag: tag,
+        response: {
+            error: "I'm light, cannot subscribe you to updates",
+        }
     }
 }
 ```
@@ -581,27 +604,33 @@ This requests returns response with chat bots of connected hub.
 
 {% tab title="response.json" %}
 ```javascript
-[
-  {
-    "id": 29,
-    "name": "Buy Bytes with Visa or Mastercard",
-    "pairing_code": "A1i/ij0Na4ibEoSyEnTLBUidixtpCUtXKjgn0lFDRQwK@byteball.org/bb#0000",
-    "description": "This bot helps to buy Bytes with Visa or Mastercard.  The payments are processed by Indacoin.  Part of the fees paid is offset by the reward you receive from the undistributed funds."
-  },
-  {
-    "id": 31,
-    "name": "World Community Grid linking bot",
-    "pairing_code": "A/JWTKvgJQ/gq9Ra+TCGbvff23zqJ9Ec3Bp0XHxyZOaJ@byteball.org/bb#0000",
-    "description": "Donate your device’s spare computing power to help scientists solve the world’s biggest problems in health and sustainability, and earn some Bytes in the meantime.  This bot allows you to link your Byteball address and WCG account in order to receive daily rewards for your contribution to WCG computations.\n\nWCG is an IBM sponsored project, more info at https://www.worldcommunitygrid.org"
-  },
-  {
-    "id": 36,
-    "name": "Username registration bot",
-    "pairing_code": "A52nAAlO05BLIfuoZk6ZrW5GjJYvB6XHlCxZBJjpax3c@byteball.org/bb#0000",
-    "description": "Buy a username and receive money to your @username instead of a less user-friendly cryptocurrency address.\n\nProceeds from the sale of usernames go to Byteball community fund and help fund the development and promotion of the platform."
-  },
-  ...
-]
+{
+	type: 'response',
+	content: {
+		tag: tag,
+		response: [
+			{
+				"id": 29,
+				"name": "Buy Bytes with Visa or Mastercard",
+				"pairing_code": "A1i/ij0Na4ibEoSyEnTLBUidixtpCUtXKjgn0lFDRQwK@byteball.org/bb#0000",
+				"description": "This bot helps to buy Bytes with Visa or Mastercard.  The payments are processed by Indacoin.  Part of the fees paid is offset by the reward you receive from the undistributed funds."
+			},
+			{
+				"id": 31,
+				"name": "World Community Grid linking bot",
+				"pairing_code": "A/JWTKvgJQ/gq9Ra+TCGbvff23zqJ9Ec3Bp0XHxyZOaJ@byteball.org/bb#0000",
+				"description": "Donate your device’s spare computing power to help scientists solve the world’s biggest problems in health and sustainability, and earn some Bytes in the meantime.  This bot allows you to link your Byteball address and WCG account in order to receive daily rewards for your contribution to WCG computations.\n\nWCG is an IBM sponsored project, more info at https://www.worldcommunitygrid.org"
+			},
+			{
+			"id": 36,
+				"name": "Username registration bot",
+				"pairing_code": "A52nAAlO05BLIfuoZk6ZrW5GjJYvB6XHlCxZBJjpax3c@byteball.org/bb#0000",
+				"description": "Buy a username and receive money to your @username instead of a less user-friendly cryptocurrency address.\n\nProceeds from the sale of usernames go to Byteball community fund and help fund the development and promotion of the platform."
+			},
+			...
+		]
+	}
+}
 ```
 {% endtab %}
 {% endtabs %}
@@ -631,9 +660,9 @@ This requests returns response with asset metadata \(unit and registry\). Exampl
     content: {
         tag: tag,
         response: {
-          "metadata_unit": "0xXOuaP5e3z38TF5ooNtDhmwNkh1i21rBWDvrrxKt0U=",
-          "registry_address": "AM6GTUKENBYA54FYDAKX2VLENFZIMXWG",
-          "suffix": null
+            "metadata_unit": "0xXOuaP5e3z38TF5ooNtDhmwNkh1i21rBWDvrrxKt0U=",
+            "registry_address": "AM6GTUKENBYA54FYDAKX2VLENFZIMXWG",
+            "suffix": null
         }
     }
 }
@@ -741,6 +770,18 @@ This requests returns response with transaction history of specified addresses.
     }
 }
 ```
+
+```javascript
+{
+    type: "response",
+    content: {
+        tag: tag,
+        response: {
+            error: "I'm light myself, can't serve you",
+        }
+    }
+}
+```
 {% endtab %}
 {% endtabs %}
 
@@ -773,6 +814,18 @@ This requests returns response with attestation units for specified field and va
     content: {
         tag: tag,
         response: 'jeiBABcZI5fjyIPHkpb2PipLHzjUgafoPd0b6bdsGUI='
+    }
+}
+```
+
+```javascript
+{
+    type: "response",
+    content: {
+        tag: tag,
+        response: {
+            error: "I'm light myself, can't serve you",
+        }
     }
 }
 ```
@@ -817,6 +870,18 @@ This requests returns response with all the attestation data about specific addr
     }
 }
 ```
+
+```javascript
+{
+    type: "response",
+    content: {
+        tag: tag,
+        response: {
+            error: "I'm light myself, can't serve you",
+        }
+    }
+}
+```
 {% endtab %}
 {% endtabs %}
 
@@ -854,6 +919,18 @@ This requests returns response with spendable inputs for specified asset, amount
     }
 }
 ```
+
+```javascript
+{
+    type: "response",
+    content: {
+        tag: tag,
+        response: {
+            error: "I'm light myself, can't serve you",
+        }
+    }
+}
+```
 {% endtab %}
 {% endtabs %}
 
@@ -887,6 +964,18 @@ This requests returns response with address definition \(smart-contracts have ad
             "pubkey": "Aiy5z+jM1ySTZl1Qz1YZJouF7tU6BU++SYc/xe0Rj5OZ"
           }
         ]
+    }
+}
+```
+
+```javascript
+{
+    type: "response",
+    content: {
+        tag: tag,
+        response: {
+            error: "I'm light myself, can't serve you",
+        }
     }
 }
 ```
@@ -937,6 +1026,18 @@ This request returns a response with balances of one or more addresses.
     }
 }
 ```
+
+```javascript
+{
+    type: "response",
+    content: {
+        tag: tag,
+        response: {
+            error: "I'm light myself, can't serve you",
+        }
+    }
+}
+```
 {% endtab %}
 {% endtabs %}
 
@@ -969,6 +1070,18 @@ It is possible for users to post a profile information about themselves, this re
         response: [
           "gUrJfmdDeYhTKAHM5ywydHXpvcensbkv8TPQLuPG3b0="
         ]
+    }
+}
+```
+
+```javascript
+{
+    type: "response",
+    content: {
+        tag: tag,
+        response: {
+            error: "I'm light myself, can't serve you",
+        }
     }
 }
 ```

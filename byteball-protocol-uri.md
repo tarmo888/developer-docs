@@ -6,7 +6,7 @@ description: >-
 
 # URI protocol
 
-If you want to open Obyte app for users then there is a `obyte:` protocol [URI ](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#Examples)for that. If you are not aware what it is then it's like `mailto:` , `ftp:` , `tel:` or [intents on Android](https://developer.android.com/reference/android/content/Intent). When user visits a link with that protocol then it can open the wallet app in specific screen with pre-filled inputs, helping users to insert long account addresses or amounts without the need to copy-paste them.
+If you want to open Obyte app for users then there is a `obyte:` protocol [URI ](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#Examples)for that. If you are not aware what it is then it's like `mailto:` , `ftp:` , `tel:` or [intents on Android](https://developer.android.com/reference/android/content/Intent). When user visits a link with that protocol then it can open the wallet app in specific screen with pre-filled inputs, helping users to insert long wallet addresses or amounts without the need to copy-paste them.
 
 ## Opening Send screen
 
@@ -17,34 +17,26 @@ Following hyperlinks will open the wallet app on Send screen. These hyperlinks \
 We can [request payments with chat bot messages](payments/#requesting-payments) and we can use the same commands as links on the website. This is how it will look as a hyperlink:
 
 ```markup
-<a href="obyte:ACCOUNT_ADDRESS?amount=123000&amp;asset=base">
+<a href="obyte:WALLET_ADDRESS?amount=123000&amp;asset=base">
     open Send screen with bytes
 </a>
 ```
 
-`ACCOUNT_ADDRESS` should be replaced with the wallet address where the funds should be sent, `amount` parameter should have `bigInt` type number in bytes \(not KByte, not MByte, not GByte\) and `asset` parameter is optional, by default it is `base` for bytes, but it can be issued [asset unit ID](issuing-assets-on-byteball.md#asset-id) too.
+`WALLET_ADDRESS` should be replaced with the wallet address where the funds should be sent, `amount` parameter should have `bigInt` type number in bytes \(not KByte, not MByte, not GByte\) and `asset` parameter is optional, by default it is `base` for bytes, but it can be issued [asset unit ID](issuing-assets-on-byteball.md#asset-id) too.
 
 One website that heavily relies on this feature is [Currency converter for Obyte](https://tarmo888.github.io/bb-convert/) \([source code](https://github.com/tarmo888/bb-convert)\).
 
-It is also possible to request that the payment to be done from specific address in user's wallet. Since wallet version 3.3.0, this also work from [chat messages](payments/#payments-from-single-address-wallet).
+It is also possible to request that the payment to be done from specific address in user's wallet. This doesn't work as chat message, [request payment from single address instead](payments/#payments-from-single-address-wallet).
 
 ```markup
-<a href="obyte:ACCOUNT_ADDRESS?amount=123000&amp;from_address=USER_ACCOUNT_ADDRESS">
-    open Send screen with bytes
-</a>
-```
-
-If you don't know user's account address, but still want them to user single-address account then you can use `single_address=1` parameter like this:
-
-```markup
-<a href="obyte:ACCOUNT_ADDRESS?amount=123000&amp;single_address=1">
+<a href="obyte:WALLET_ADDRESS?amount=123000&amp;from_address=USER_WALLET_ADDRESS">
     open Send screen with bytes
 </a>
 ```
 
 ### Requesting to send data to AA
 
-In order to open a Send screen with pre-filled payment and data, the data object needs to be converted into URI encoded Base64 \(using `JSON.stringify`, `btoa` and`encodeURIComponent`\) string. Many cases, when the Autonomous Agent stores data based on triggering address, we would also want the users to use single-address account, this can by adding the `single_address=1` parameter. Autonomous agents can also accept nested data.
+In order to open a Send screen with pre-filled payment and data, the data object needs to be converted into URI encoded Base64 \(using `JSON.stringify`, `btoa` and`encodeURIComponent`\) string. Autonomous agents can accept nested data, but wallet Send screen will only show the first level of the data.
 
 ```javascript
 var base64 = global.btoa || require('btoa');
@@ -64,14 +56,14 @@ var uri_encoded_base64data = encodeURIComponent(base64_string);
 This will open Send screen, which will be pre-filled to post 10 000 bytes and data object.
 
 ```markup
-<a href="obyte:AA_ADDRESS?amount=10000&amp;single_address=1&amp;base64data=eyJudW1iZXIiOjEsImZvbyI6ImJhciIsImZvb2JhciI6eyJmb28iOiJiYXIifSwiPzw%2FPj8iOlsiYSIsMSwyLDNdfQ%3D%3D">
+<a href="obyte:AA_ADDRESS?amount=10000&amp;base64data=eyJudW1iZXIiOjEsImZvbyI6ImJhciIsImZvb2JhciI6eyJmb28iOiJiYXIifSwiPzw%2FPj8iOlsiYSIsMSwyLDNdfQ%3D%3D">
     open Send screen with bytes and data
 </a>
 ```
 
 ### Requesting to post data
 
-This will open Send screen, which will be pre-filled to post unstructured key/value pairs as data \(single-address account required\). Keys need to be unique.
+This will open Send screen, which will be pre-filled to post unstructured key/value pairs as data \(single-address wallet required\). Keys need to be unique.
 
 ```markup
 <a href="obyte:data?app=data&amp;anykey1=anyvalue&amp;anykey2=anyvalue">
@@ -81,7 +73,7 @@ This will open Send screen, which will be pre-filled to post unstructured key/va
 
 ### Requesting to post data feed
 
-This will open Send screen, which will be pre-filled to post indexable key/value pairs as data feed \(single-address account required\). Keys need to be unique.
+This will open Send screen, which will be pre-filled to post indexable key/value pairs as data feed \(single-address wallet required\). Keys need to be unique.
 
 ```markup
 <a href="obyte:data?app=data_feed&amp;anykey1=anyvalue&amp;anykey2=anyvalue">
@@ -91,7 +83,7 @@ This will open Send screen, which will be pre-filled to post indexable key/value
 
 ### Requesting to post a profile
 
-This will open Send screen, which will be pre-filled to post key/value pairs as profile info \(single-address account required\). Keys need to be unique.
+This will open Send screen, which will be pre-filled to post key/value pairs as profile info \(single-address wallet required\). Keys need to be unique.
 
 ```markup
 <a href="obyte:data?app=profile&amp;anykey1=anyvalue&amp;anykey2=anyvalue">
@@ -101,17 +93,17 @@ This will open Send screen, which will be pre-filled to post key/value pairs as 
 
 ### Requesting to post attestation
 
-This will open Send screen, which will be pre-filled to post key/value pairs as someone else attestation profile \(single-address account required\). Keys need to be unique.
+This will open Send screen, which will be pre-filled to post key/value pairs as someone else attestation profile \(single-address wallet required\). Keys need to be unique.
 
 ```markup
-<a href="obyte:data?app=attestation&amp;address=ACCOUNT_ADDRESS&amp;anykey1=anyvalue&amp;anykey2=anyvalue">
+<a href="obyte:data?app=attestation&amp;address=WALLET_ADDRESS&amp;anykey1=anyvalue&amp;anykey2=anyvalue">
     open Send screen with attestation
 </a>
 ```
 
 ### Requesting to post a poll
 
-This will open Send screen, which will be pre-filled to post poll \(single-address account required\). Option keys can be named anything, but values need to be unique. Question parameter is also required.
+This will open Send screen, which will be pre-filled to post poll \(single-address wallet required\). Option keys can be named anything, but values need to be unique. Question parameter is also required.
 
 ```markup
 <a href="obyte:data?app=poll&amp;question=How%20are%20you&amp;option1=fine&amp;option2=tres%20bien">
@@ -121,7 +113,7 @@ This will open Send screen, which will be pre-filled to post poll \(single-addre
 
 ### Requesting to post a AA definition
 
-This will open Send screen, which will be pre-filled to post Autonomous Agent definition \(single-address account required\). The `definition` parameter needs to be URL encoded.
+This will open Send screen, which will be pre-filled to post Autonomous Agent definition \(single-address wallet required\). The `definition` parameter needs to be URL encoded.
 
 ```markup
 <a href="obyte:data?app=definition&amp;definition=%7B%0A%09messages%3A%20%5B%0A%09%09%7B%0A%09%09%09app%3A%20'payment'%2C%0A%09%09%09payload%3A%20%7B%0A%09%09%09%09asset%3A%20'base'%2C%0A%09%09%09%09outputs%3A%20%5B%0A%09%09%09%09%09%7B%0A%09%09%09%09%09%09address%3A%20%22%7Btrigger.address%7D%22%0A%09%09%09%09%09%7D%0A%09%09%09%09%5D%0A%09%09%09%7D%0A%09%09%7D%0A%09%5D%0A%7D">
@@ -139,7 +131,7 @@ Because most browsers support only URLs up to 2048 characters length, it is also
 
 ### Requesting to post short text content
 
-This will open Send screen, which will be pre-filled to post short text content \(single-address account required\). The `content` parameter needs to be URL encoded and can be maximum of 140 chars before encoding.
+This will open Send screen, which will be pre-filled to post short text content \(single-address wallet required\). The `content` parameter needs to be URL encoded and can be maximum of 140 chars before encoding.
 
 ```markup
 <a href="obyte:data?app=text&amp;content=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit.%0AQuisque%20venenatis%20elementum%20dolor%20in%20malesuada.%20Cras%20ultrices%20ultrices%20fermentum.%20Nullam%20ac%20commodo%20ante.%20Pellentesque%20quis%20nibh%20laoreet%2C%20sagittis%20augue%20in%2C%20dapibus%20nunc.%20Etiam%20vel%20eleifend%20urna%2C%20in%20tincidunt%20turpis%20nullam.">
@@ -219,7 +211,7 @@ $(document).ready(function() {
 	$('#qr_code').html('').qrcode({
 		width: 512,
 		height: 512,
-		text: 'obyte:ACCOUNT_ADDRESS?amount=123000&asset=base'
+		text: 'obyte:WALLET_ADDRESS?amount=123000&asset=base'
 	});
 });
 </script>
