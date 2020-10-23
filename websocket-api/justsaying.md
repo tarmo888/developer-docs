@@ -191,18 +191,6 @@ Following is a list of `justsaying` type JSON messages that are sent over the ne
 }
 ```
 
-### **Tell light wallet that sequence became bad**
-
-```javascript
-{
-    type: 'justsaying',
-    content: {
-        subject: 'light/sequence_became_bad', 
-        body: arrUniqueUnits
-    }
-}
-```
-
 ### **Add light wallet to monitor address**
 
 ```javascript

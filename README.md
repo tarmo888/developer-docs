@@ -46,14 +46,9 @@ var eventBus = require('ocore/event_bus.js');
 
 function onReady() {
     let amount = 1; //in bytes
-    let user_address = "62SU7724ME5MWB7VEP64VURYZHDRSDWN"; // account address
+    let user_address = "62SU7724ME5MWB7VEP64VURYZHDRSDWN"; // wallet address
     let user_device_address = null; // device address
-    headlessWallet.issueChangeAddressAndSendPayment(
-        null /*asset, null for bytes*/,
-        amount,
-        user_address,
-        user_device_address,
-    (err, unit) => {
+    headlessWallet.issueChangeAddressAndSendPayment(null /*asset, null for bytes*/, amount, user_address, user_device_address, (err, unit) => {
         if (err){
             return console.error(err);
         }
@@ -161,7 +156,7 @@ Messages to user's device can be sent with `sendMessageToDevice` function in `de
 ```javascript
 var device = require('ocore/device.js');
 var message_to_user = 'Message from bot to user';
-device.sendMessageToDevice(from_address, 'text', message_to_user);
+device.sendMessageToDevice(user_device_address, 'text', message_to_user);
 ```
 {% endcode %}
 

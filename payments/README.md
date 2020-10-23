@@ -14,7 +14,7 @@ When you include a valid Obyte address anywhere in the text of your response to 
 When you want to request a specific amount of a specific asset, format your payment request this way:
 
 ```text
-Any text before [payment description, will be ignored](obyte:ACCOUNT_ADDRESS?amount=123000&asset=base) any text after
+Any text before [payment description, will be ignored](obyte:USER_WALLET_ADDRESS?amount=123000&asset=base) any text after
 ```
 
 Example: ![](../.gitbook/assets/image-10.png)
@@ -25,20 +25,13 @@ You will likely want to generate a unique payment address per user, per transact
 
 ```javascript
 var headlessWallet = require('headless-obyte');
+var device = require('ocore/device.js');
 
 eventBus.once('headless_wallet_ready', () => {
-
-    eventBus.on('text', function(from_address, text) {
-        const device = require('ocore/device.js');
-        
-        if (text === 'resend') {
-            headlessWallet.issueNextMainAddress((deposit_address) => {
-                // send it over to the user
-                device.sendMessageToDevice(from_address, 'text',
-                    '[...](obyte:'+ deposit_address +'?amount=123000&asset=base)');
-                });
-            });
-        }
+    headlessWallet.issueNextMainAddress((user_wallet_address) => {
+        // send it over to the user
+        device.sendMessageToDevice(user_device_address, 'text',
+            '[...](obyte:'+ user_wallet_address +'?amount=123000&asset=base)');
     });
 });
 ```
@@ -48,8 +41,8 @@ eventBus.once('headless_wallet_ready', () => {
 It is possible to request that the payment would be done from any single address wallet or specific single address wallet. This works only in chat messages.
 
 ```text
-[...](obyte:ACCOUNT_ADDRESS?amount=1&single_address=1)
-[...](obyte:ACCOUNT_ADDRESS?amount=1&single_address=1&from_address=UEPO3OD2TUUJUOECVMKVSRHRDJ4ST2FS)
+[...](obyte:USER_WALLET_ADDRESS?amount=1&single_address=1)
+[...](obyte:USER_WALLET_ADDRESS?amount=1&single_address=singleUEPO3OD2TUUJUOECVMKVSRHRDJ4ST2FS)
 ```
 
 ## Requesting multiple payments
@@ -68,7 +61,7 @@ var paymentJsonBase64 = Buffer.from(paymentJson).toString('base64');
 var paymentRequestCode = 'payment:'+paymentJsonBase64;
 var paymentRequestText = '[...]('+paymentRequestCode+')';
 
-device.sendMessageToDevice(from_address, 'text', paymentRequestText);
+device.sendMessageToDevice(user_device_address, 'text', paymentRequestText);
 ```
 
 The user's wallet will parse this message, display the multiple payments in a user-readable form, and offer the user to pay the requested amounts. Your payment-waiting code will be called when the payment is seen on the DAG.
@@ -140,7 +133,7 @@ and use this function after the headless wallet becomes ready:
 
 ```javascript
 eventBus.once('headless_wallet_ready', () => {
-    headlessWallet.issueChangeAddressAndSendPayment(asset, amount, account_address, from_address, (err, unit) => {
+    headlessWallet.issueChangeAddressAndSendPayment(asset, amount, user_wallet_address, user_device_address, (err, unit) => {
         if (err){
             // something went wrong, maybe put this payment on a retry queue
             return;
