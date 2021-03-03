@@ -118,7 +118,7 @@ var asset = {
 };
 ```
 
-The definition can also include two optional properties `issue_condition` and `transfer_condition`which specify the restrictions when the asset can be issued and transferred. They evaluate to a boolean and are coded in the same [smart contract language](contracts/reference.md) as address definitions.
+The definition can also include two optional properties `issue_condition` and `transfer_condition` which specify the restrictions when the asset can be issued and transferred. They evaluate to a boolean and are coded in the same [smart contract language](contracts/reference.md) as address definitions.
 
 ```javascript
 var asset = {
