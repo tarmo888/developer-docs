@@ -114,6 +114,22 @@ eventBus.on('my_transactions_became_stable', (arrUnits) => {
 });
 ```
 
+### Bad transactions
+
+```javascript
+eventBus.on('sequence_became_bad', (arrUniqueUnits) => {
+
+});
+```
+
+### First history received
+
+```javascript
+eventBus.on('first_history_received', () => {
+
+});
+```
+
 ### Changes with addresses leading to possible new transactions
 
 ```javascript
@@ -142,6 +158,14 @@ eventBus.on("received_payment", (payer_device_address, assocAmountsByAsset, asse
 
 ```javascript
 eventBus.on('my_stable-' + unit , () => {
+
+});
+```
+
+### Syncing is idle
+
+```javascript
+eventBus.on('sync_idle' , () => {
 
 });
 ```
