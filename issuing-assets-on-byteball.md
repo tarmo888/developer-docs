@@ -104,7 +104,7 @@ var asset = {
 };
 ```
 
-`issued_by_definer_only`: indicates whether the asset can be issued only by the definer address. If `false`, anyone can issue the asset, in this case `cap` must be unlimited.
+`issued_by_definer_only`: indicates whether the asset can be issued only by the definer address. If `false`, anyone can issue the asset, in this case `cap` must be unlimited and it would make sense that issuing is limited by `issue_condition`.
 
 `cosigned_by_definer`: indicates whether each operation with the asset must be cosigned by the definer address. Useful for regulated assets where the issuer \(bank\) wants to perform various compliance checks \(such as the funds are not arrested by a court order\) prior to approving a transaction. This could also be used to allow fee-less asset transfers for users \(paid by definer\), but wallets don't support that yet. 
 
