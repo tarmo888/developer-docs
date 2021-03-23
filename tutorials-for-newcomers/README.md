@@ -53,11 +53,12 @@ Obyte Github page is located there [https://github.com/byteball](https://github.
 * shows list of chat bots that are available to pair with.
 * shows metadata about assets.
 
-### bot-example - template for new bots
+### bot-example - template for new projects
 
 * inherits `headless-obyte` and `ocore` library.
 * customized [chat messages handling](../list-of-events.md#a-new-message-string-type-message-has-been-received) can be added.
 * customized actions on [new transactions](../list-of-events.md#new-unstable-unit) and [stable transactions](../list-of-events.md#stable-unit) can be added.
+* can be used as a base of any new project that needs Obyte wallet functionality.
 
 ## Tutorials to setup a node
 
