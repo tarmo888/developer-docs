@@ -5,11 +5,13 @@
 
 [obyte.js](https://obytejs.com/) - Lightweight library for working with Obyte from browser and node.js  
 [kbyte.js](https://bonustrack.gitbook.io/kbyte/) - Very lightweight JS library \(predecessor of obyte.js\)  
-[owallet.js](https://github.com/olabs-org/owallet.js) - Very lightweight Obyte wallet. It works everywhere where you can run JS \(based on obyte.js\)
+[owallet.js](https://github.com/olabs-org/owallet.js) - Very lightweight Obyte wallet. It works everywhere where you can run JS \(based on obyte.js\)  
+[texto.js](https://github.com/bonustrack/oswap.io/tree/master/src/helpers/_texto) - Lightweight messaging library on Obyte
 
 [VS Code plugin for Oscript](https://marketplace.visualstudio.com/items?itemName=obyte.oscript-vscode-plugin)  
 [aa-testkit](https://github.com/valyakin/aa-testkit) - Instant Obyte devnet network set up and testing  
 [parser-aa-vars](https://github.com/olabs-org/parser-aa-vars) - Script for parsing variables from AA  
+[aabot](https://github.com/byteball/aabot) - Node.js library for interacting with Autonomous Agents and tracking their state  
 [aagent.js ](https://github.com/olabs-org/aagent.js)- Helper library for AA data and events
 
 [AA-channels-lib](https://github.com/byteball/aa-channels-lib) - a general purpose library for payment channels  
