@@ -4,6 +4,7 @@
 [headless-obyte](https://github.com/byteball/headless-obyte) - official wallet and messaging library
 
 [obyte.js](https://obytejs.com/) - Lightweight library for working with Obyte from browser and node.js  
+[kbyte.js](https://bonustrack.gitbook.io/kbyte/) - Very lightweight JS library \(predecessor of obyte.js\)  
 [owallet.js](https://github.com/olabs-org/owallet.js) - Very lightweight Obyte wallet. It works everywhere where you can run JS \(based on obyte.js\)
 
 [VS Code plugin for Oscript](https://marketplace.visualstudio.com/items?itemName=obyte.oscript-vscode-plugin)  
