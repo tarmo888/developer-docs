@@ -1,6 +1,6 @@
 # Libraries and Scripts
 
-[ocore](https://github.com/byteball/ocore) - official core library  
+[ocore](https://github.com/byteball/ocore) - official core networking and consensus library  
 [headless-obyte](https://github.com/byteball/headless-obyte) - official wallet and messaging library
 
 [obyte.js](https://obytejs.com/) - Lightweight library for working with Obyte from browser and node.js  
