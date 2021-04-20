@@ -23,6 +23,8 @@
 [ocore-wallet](https://github.com/guantau/ocore-wallet) - A Simple Command Line Interface Wallet for Obyte using OWS/OWC  
 [ocore-wallet-client](https://github.com/guantau/ocore-wallet-client) - A Multisig HD Obyte Light Wallet Client
 
+[Obyte Assets Ledger](https://github.com/byteball/obyte-assets-ledger) - API for headless wallet, which can be used as internal exchange ledger with its own tokens.
+
 [byteball-rpc-client](https://github.com/emre/byteball-rpc-client) - JSON-RPC client on Python
 
 
