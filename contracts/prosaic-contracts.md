@@ -6,7 +6,7 @@ To offer a prosaic contract from your bot, you have to follow these steps:
 
 * user pairs with your bot.
 * you ask the user to send his payment address \(it will be included in the contract\) in the chat.
-* you [send the user the private profile](../../private-profiles.md#sending-private-profile) of the other side of the contract.
+* you [send the user the private profile](../private-profiles.md#sending-private-profile) of the other side of the contract.
 * you create a new prosaic contract using the user's address and your address as parties of the contract \(also defining contract's title, text and how long the offer is valid\).
 * you send specially formatted chat message with the contract to the user and wait for the response on it \('accept' or 'decline'\).
 * the user views the contract in his wallet and agrees or declines it.
