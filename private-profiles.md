@@ -132,7 +132,7 @@ It will save the profile in the tables `private_profiles` and `private_profile_f
 
 ## Sending private profile
 
-If your bot is setting up [prosaic contracts](contracts/prosaic-contracts.md) between 2 users then they need to get each others private profiles. All you need to do is first request the profiles from both users, then receive and save the profiles from both users and then send the first user and second user's profile and the second user a first user's profile.
+If your bot is setting up [prosaic contracts](contracts/prosaic-contracts/) between 2 users then they need to get each others private profiles. All you need to do is first request the profiles from both users, then receive and save the profiles from both users and then send the first user and second user's profile and the second user a first user's profile.
 
 ```javascript
 db.query("SELECT unit, payload_hash, src_profile \
