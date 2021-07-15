@@ -6,7 +6,9 @@ description: >-
 
 # Smart contracts
 
-The smart contract language is declarative, meaning that it expresses **what** conditions must be met to allow movement of money, rather than **how** the decisions are made. This makes it easy to see that the implementation of the contract matches its intent, and hard to make mistakes \(which cannot be undone in distributed ledgers\). However, the language is not as powerful as Ethereum’s Solidity, it is not Turing-complete, it doesn’t allow to code any program, rather it is a domain specific language for money on the distributed ledger.
+The smart contract language is declarative, meaning that it expresses **what** conditions must be met to allow movement of money, rather than **how** the decisions are made. This makes it easy to see that the implementation of the contract matches its intent, and hard to make mistakes \(which cannot be undone in distributed ledgers\).
+
+However, the language is not as powerful as Ethereum’s Solidity, it is not Turing-complete, it doesn’t allow to code any program, rather it is a domain specific language for money on the distributed ledger. They are more like [Discreet Log Contracts](https://adiabat.github.io/dlc.pdf) for Bitcoin. If you are looking to build more complex dApps that are as capable as Ethereum smart-contracts, then you need to use [Autonomous Agents](../autonomous-agents/).
 
 Money on Obyte is stored on addresses. Address is just a hash \(plus checksum\) of an [address definition](reference.md), and the address definition is an expression in the Obyte smart contract language that evaluates to either `true` or `false`.
 
