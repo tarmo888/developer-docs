@@ -37,5 +37,5 @@ Some of the features of the language:
 
 ![](../.gitbook/assets/oscript-editor.png)
 
-AA code can be deployed with [Oscript](https://oscript.org)[ \(mainnet\)](https://oscript.org)[ editor](https://oscript.org) and [Oscript](https://testnet.oscript.org/)[ \(testnet\)](https://testnet.oscript.org/)[ editor](https://testnet.oscript.org/). There is also a [extension for VS Code](https://marketplace.visualstudio.com/items?itemName=obyte.oscript-vscode-plugin).
+AA code can be deployed with [Oscript](https://oscript.org)[ \(mainnet\)](https://oscript.org)[ editor](https://oscript.org) and [Oscript](https://testnet.oscript.org/)[ \(testnet\)](https://testnet.oscript.org/)[ editor](https://testnet.oscript.org/). There is also a [extension for VS Code](https://marketplace.visualstudio.com/items?itemName=obyte.oscript-vscode-plugin) and [Autonomous Agent testkit](https://github.com/valyakin/aa-testkit).
 
